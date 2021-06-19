@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +12,42 @@
 </head>
 
 <body>
+    <header>
+        <p>Salary Calculator</p>
+    </header>
+    <main>
+        <section id=#employeeFormContainer>
+            <p>Add Employee</p>
+            <form id=#employeeForm>
+                <input type="text" id=#employeeFirstName placeholder="First Name">
+                <input type="text" id=#employeeLastName placeholder="Last Name">
+                <input type="text" id=#employeeId placeholder="ID">
+                <input type="text" id=#employeeTitle placeholder="Title">
+                <input type="text" id=#employeeSalary placeholder="Annual Salary">
+                <button id=#submitEmployeeSalary>Submit</button>
+            </form>
+        </section>
+        <section id=#employeeTableContainer>
+            <p>Employees</p>
+            <table id="employeeTable">
+                <thead id="employeeTablHead">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Annual Salary</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
 
+                </tbody>
+            </table>
+            <p id="totalMonthly">Total Monthly:$0</p>
+        </section>
+    </main>
+    <footer></footer>
 </body>
 
 </html>
