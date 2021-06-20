@@ -34,5 +34,17 @@ function addEmployee() {
 //Function that shows all employees on Employee Table
 function updateEmployeesTable() {
     console.log(employeesArray);
+    let tableBody = $('#employeeTableBody');
+    let newRow = "";
+    let element = "";
+    tableBody.empty();
+    for (const employee of employeesArray) {
+        newRow = "";
+        for (const key in employee) {
+            element = `<th>${employee[key]}</th>`;
+            newRow += element;
+        }
+        tableBody.append(`<tr>${newRow}</tr>`);
+    }
 }
 //Function that deletes employee from array
