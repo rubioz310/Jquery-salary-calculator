@@ -1,8 +1,7 @@
 $(readyNow);
 
 function readyNow() {
-    console.log('Salary Calculator')
-    submitEmployee();
+    eventListener();
 }
 //Array for all employees
 const employeesArray = [];
@@ -16,8 +15,9 @@ function Employee(firstName, lastName, id, title, salary) {
     this.salary = salary;
 }
 //Function that saves all data from Employee Form to an array as an object
-function submitEmployee() {
+function eventListener() {
     $('#submitEmployeeButton').on("click", addEmployee);
+    $('#employeeTableBody').on('click', '.delete', function() { deleteEmployee($(this).attr('id')); });
 }
 //Function that listens to submit Employee button
 function addEmployee() {
@@ -31,7 +31,6 @@ function addEmployee() {
     employeesArray.push(employee);
     clearInputs();
     updateEmployeesTable();
-    updateMonthlyCost();
 }
 //Function that shows all employees on Employee Table
 function updateEmployeesTable() {
@@ -49,9 +48,14 @@ function updateEmployeesTable() {
         newRow += `<th><button id="${employee.id}" class="button delete">Delete</button></th>`
         tableBody.append(`<tr>${newRow}</tr>`);
     }
+    updateMonthlyCost();
 }
 //Function that deletes employee from array
-
+function deleteEmployee(id) {
+    console.log(id);
+    employeesArray.splice(employeesArray.findIndex(x => x.id == id), 1);
+    updateEmployeesTable();
+}
 //Function that clears all inputs after submit
 function clearInputs() {
     $('#employeeFirstName').val('');
@@ -64,10 +68,10 @@ function clearInputs() {
 function updateMonthlyCost() {
     let monthlyCost = 0;
     for (const employee of employeesArray) {
-        monthlyCost += employee.salary;
+        monthlyCost += parseInt(employee.salary);
     }
     monthlyCost /= 12;
     $('#totalMonthly').removeClass('exceeded')
     if (monthlyCost > 20000) { $('#totalMonthly').addClass('exceeded') }
-    $('#totalMonthly').text(`$${monthlyCost}`);
+    $('#totalMonthly').empty().text(`$${ monthlyCost }`);
 }
