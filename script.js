@@ -3,8 +3,17 @@ $(readyNow);
 function readyNow() {
     eventListener();
 }
+
 //Array for all employees
 const employeesArray = [];
+
+//Object for warning messages
+const message = {
+    1: "Employee added successfully",
+    2: "Fill out all empty fields",
+    3: "ID already in use",
+    4: "Enter only numbers for Salary"
+}
 
 //Function that creates new Employee object
 function Employee(firstName, lastName, id, title, salary) {
@@ -14,12 +23,14 @@ function Employee(firstName, lastName, id, title, salary) {
     this.title = title;
     this.salary = salary;
 }
-//Function that saves all data from Employee Form to an array as an object
+
+//Function that listens to submit Employee button
 function eventListener() {
     $('#submitEmployeeButton').on("click", addEmployee);
     $('#employeeTableBody').on('click', '.delete', function() { deleteEmployee($(this).attr('id')); });
 }
-//Function that listens to submit Employee button
+
+//Function that saves all data from Employee Form to an array as an object
 function addEmployee() {
     const employee = new Employee(
         $('#employeeFirstName').val(),
@@ -28,13 +39,17 @@ function addEmployee() {
         $('#employeeTitle').val(),
         $('#employeeSalary').val()
     );
-    employeesArray.push(employee);
-    clearInputs();
-    updateEmployeesTable();
+    let msg = fieldValidation(employee)
+    if (msg == 1) {
+        employeesArray.push(employee);
+        clearInputs();
+        updateEmployeesTable();
+    }
+    alert(message[msg]);
+
 }
 //Function that shows all employees on Employee Table
 function updateEmployeesTable() {
-    console.log(employeesArray);
     let tableBody = $('#employeeTableBody');
     let newRow = "";
     let element = "";
@@ -50,12 +65,13 @@ function updateEmployeesTable() {
     }
     updateMonthlyCost();
 }
+
 //Function that deletes employee from array
 function deleteEmployee(id) {
-    console.log(id);
     employeesArray.splice(employeesArray.findIndex(x => x.id == id), 1);
     updateEmployeesTable();
 }
+
 //Function that clears all inputs after submit
 function clearInputs() {
     $('#employeeFirstName').val('');
@@ -65,13 +81,27 @@ function clearInputs() {
     $('#employeeSalary').val('');
 }
 
+//Function that updates monthly cost
 function updateMonthlyCost() {
     let monthlyCost = 0;
     for (const employee of employeesArray) {
         monthlyCost += parseInt(employee.salary);
     }
     monthlyCost /= 12;
-    $('#totalMonthly').removeClass('exceeded')
-    if (monthlyCost > 20000) { $('#totalMonthly').addClass('exceeded') }
+    $('#totalMonthly').removeClass('exceeded');
+    if (monthlyCost > 20000) { $('#totalMonthly').addClass('exceeded'); }
     $('#totalMonthly').empty().text(`$${ monthlyCost }`);
+}
+
+function fieldValidation(newEmployee) {
+    if (!newEmployee.firstName || !newEmployee.lastName || !newEmployee.id || !newEmployee.title || !newEmployee.salary) {
+        return 2;
+    }
+
+    if ((employeesArray.findIndex(x => x.id == newEmployee.id) != -1)) {
+        return 3;
+    }
+    if (!parseInt(newEmployee.salary)) { return 4; }
+
+    return 1;
 }
