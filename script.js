@@ -31,6 +31,7 @@ function addEmployee() {
     employeesArray.push(employee);
     clearInputs();
     updateEmployeesTable();
+    updateMonthlyCost();
 }
 //Function that shows all employees on Employee Table
 function updateEmployeesTable() {
@@ -58,4 +59,15 @@ function clearInputs() {
     $('#employeeId').val('');
     $('#employeeTitle').val('');
     $('#employeeSalary').val('');
+}
+
+function updateMonthlyCost() {
+    let monthlyCost = 0;
+    for (const employee of employeesArray) {
+        monthlyCost += employee.salary;
+    }
+    monthlyCost /= 12;
+    $('#totalMonthly').removeClass('exceeded')
+    if (monthlyCost > 20000) { $('#totalMonthly').addClass('exceeded') }
+    $('#totalMonthly').text(`$${monthlyCost}`);
 }
