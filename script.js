@@ -12,7 +12,8 @@ const message = {
     1: "Employee added successfully",
     2: "Fill out all empty fields",
     3: "ID already in use",
-    4: "Enter only numbers for Salary"
+    4: "Enter only numbers for Salary",
+    5: "Employee deleted successfully"
 }
 
 //Function that creates new Employee object
@@ -28,6 +29,8 @@ function Employee(firstName, lastName, id, title, salary) {
 function eventListener() {
     $('#submitEmployeeButton').on("click", addEmployee);
     $('#employeeTableBody').on('click', '.delete', function() { deleteEmployee($(this).attr('id')); });
+    $('#myPopup').hide();
+
 }
 
 //Function that saves all data from Employee Form to an array as an object
@@ -45,22 +48,30 @@ function addEmployee() {
         clearInputs();
         updateEmployeesTable();
     }
-    alert(message[msg]);
-
+    $('#myPopup').slideUp();
+    $('#myPopup').text(message[msg]);
+    $('#myPopup').slideDown();
 }
 //Function that shows all employees on Employee Table
 function updateEmployeesTable() {
     let tableBody = $('#employeeTableBody');
     let newRow = "";
     let element = "";
+    let salary = 0;
     tableBody.empty();
     for (const employee of employeesArray) {
         newRow = "";
         for (const key in employee) {
-            element = `<th>${employee[key]}</th>`;
+            if (key == 'salary') {
+                salary = parseInt(employee[key]).toFixed(2)
+                element = `<td>$${salary}</td>`;
+            } else {
+                element = `<td>${employee[key]}</td>`;
+            }
+
             newRow += element;
         }
-        newRow += `<th><button id="${employee.id}" class="button delete">Delete</button></th>`
+        newRow += `<td><button id="${employee.id}" class="button delete">Delete</button></td>`
         tableBody.append(`<tr>${newRow}</tr>`);
     }
     updateMonthlyCost();
@@ -69,6 +80,9 @@ function updateEmployeesTable() {
 //Function that deletes employee from array
 function deleteEmployee(id) {
     employeesArray.splice(employeesArray.findIndex(x => x.id == id), 1);
+    $('#myPopup').slideUp();
+    $('#myPopup').text(message[5]);
+    $('#myPopup').slideDown();
     updateEmployeesTable();
 }
 
@@ -88,6 +102,7 @@ function updateMonthlyCost() {
         monthlyCost += parseInt(employee.salary);
     }
     monthlyCost /= 12;
+    monthlyCost = monthlyCost.toFixed(2);
     $('#totalMonthly').removeClass('exceeded');
     if (monthlyCost > 20000) { $('#totalMonthly').addClass('exceeded'); }
     $('#totalMonthly').empty().text(`$${ monthlyCost }`);
@@ -97,11 +112,9 @@ function fieldValidation(newEmployee) {
     if (!newEmployee.firstName || !newEmployee.lastName || !newEmployee.id || !newEmployee.title || !newEmployee.salary) {
         return 2;
     }
-
     if ((employeesArray.findIndex(x => x.id == newEmployee.id) != -1)) {
         return 3;
     }
     if (!parseInt(newEmployee.salary)) { return 4; }
-
     return 1;
 }

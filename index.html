@@ -12,37 +12,61 @@
 </head>
 
 <body>
-    <header>
+    <header class="container">
         <p>Salary Calculator</p>
     </header>
     <main>
-        <section id="employeeFormContainer">
-            <p>Add Employee</p>
-            <input type="text" id="employeeFirstName" placeholder="First Name">
-            <input type="text" id="employeeLastName" placeholder="Last Name">
-            <input type="text" id="employeeId" placeholder="ID">
-            <input type="text" id="employeeTitle" placeholder="Title">
-            <input type="text" id="employeeSalary" placeholder="Annual Salary">
-            <button id="submitEmployeeButton">Submit</button>
-        </section>
-        <section id="employeeTableContainer">
-            <p>Employees</p>
-            <table id="employeeTable">
-                <thead id="employeeTableHead">
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Annual Salary</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="employeeTableBody">
+        <section class="container">
+            <section id="employeeFormContainer">
+                <legend>Add Employee</legend>
+                <label for="employeeFirstName">
+                    First Name
+                    <input type="text" id="employeeFirstName" placeholder="First Name">
+                </label>
+                <label for="employeeLastName">
+                    Last Name
+                    <input type="text" id="employeeLastName" placeholder="Last Name">
+                </label>
+                <label for="employeeId">
+                    ID
+                    <input type="text" id="employeeId" placeholder="ID">
+                </label>
+                <label for="employeeTitle">
+                    Title
+                    <input type="text" id="employeeTitle" placeholder="Title">
+                </label>
+                <label for="employeeSalary">
+                    Annual Salary
+                    <input type="text" id="employeeSalary" placeholder="Annual Salary">
+                </label>
 
-                </tbody>
-            </table>
-            <p>Total Monthly:<b id="totalMonthly"></b></p>
+                <button id="submitEmployeeButton">Submit</button>
+                <div class="popup">
+                    <span class="popupText" id="myPopup"></span>
+                </div>
+            </section>
+            <section id="employeeTableContainer">
+                <legend>Employees</legend>
+                <table id="employeeTable">
+                    <thead id="employeeTableHead">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Annual Salary</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody">
+                    </tbody>
+                    <tfoot>
+                        <td colspan="4"></td>
+                        <td>Total Monthly:</td>
+                        <td id="totalMonthly">$0.00</td>
+                    </tfoot>
+                </table>
+            </section>
         </section>
     </main>
     <footer></footer>

@@ -1,7 +1,152 @@
 body {
     background-color: rgb(173, 232, 240);
+    font-family: Poppins-Regular;
+}
+
+header {
+    background-color: rgb(0, 204, 255);
+    height: 80px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.container {
+    margin: auto;
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+}
+
+.container legend {
+    font-size: 28px;
+}
+
+.container label {
+    display: inline-block;
+    font-size: 24px;
+}
+
+.container label input {
+    display: block;
+    padding: 4px 4px;
+    border-radius: 4px;
+}
+
+.container button {
+    display: inline-block;
+    padding: 4px 8px;
+}
+
+#employeeTableContainer {
+    margin-top: 8px;
+}
+
+
+/* Table styling */
+
+table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th,
+td {
+    border: 1px solid black;
+}
+
+tbody td {
+    text-align: center;
+    color: #000;
+    font-size: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+thead th {
+    background-color: #6c7ae0;
+    color: #eee;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+tbody tr:nth-child(odd) {
+    background: #eee;
+}
+
+tbody tr:nth-child(even) {
+    background: #b1b1dd;
+}
+
+thead tr th:nth-child(1) {
+    width: 20%;
+}
+
+thead tr th:nth-child(2) {
+    width: 20%;
+}
+
+thead tr th:nth-child(3) {
+    width: 14%;
+}
+
+thead tr th:nth-child(4) {
+    width: 18%;
+}
+
+thead tr th:nth-child(5) {
+    width: 18%;
+}
+
+thead tr th:nth-child(6) {
+    width: 10%;
+}
+
+tfoot td {
+    color: #eee;
+    text-align: center;
+    background-color: #eee;
+    font-size: 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+tfoot tr td:nth-child(1) {
+    background-color: #565b83;
+}
+
+tfoot tr td:nth-child(2) {
+    background-color: #6c7ae0;
+}
+
+tfoot tr td:nth-child(3) {
+    color: #000;
 }
 
 .exceeded {
-    background-color: #f00;
+    background-color: rgb(209, 75, 75);
+}
+
+
+/* Pop up */
+
+.popup {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.popup .popupText {
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 8px;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: -80px;
 }
