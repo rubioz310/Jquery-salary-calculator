@@ -44,6 +44,7 @@ function updateEmployeesTable() {
             element = `<th>${employee[key]}</th>`;
             newRow += element;
         }
+        newRow += `<th><button id="${employee.id}" class="button delete">Delete</button></th>`
         tableBody.append(`<tr>${newRow}</tr>`);
     }
 }
