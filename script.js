@@ -29,6 +29,7 @@ function addEmployee() {
         $('#employeeSalary').val()
     );
     employeesArray.push(employee);
+    clearInputs();
     updateEmployeesTable();
 }
 //Function that shows all employees on Employee Table
@@ -49,3 +50,12 @@ function updateEmployeesTable() {
     }
 }
 //Function that deletes employee from array
+
+//Function that clears all inputs after submit
+function clearInputs() {
+    $('#employeeFirstName').val('');
+    $('#employeeLastName').val('');
+    $('#employeeId').val('');
+    $('#employeeTitle').val('');
+    $('#employeeSalary').val('');
+}
